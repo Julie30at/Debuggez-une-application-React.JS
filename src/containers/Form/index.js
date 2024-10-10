@@ -36,8 +36,8 @@ const Form = ({ onSuccess, onError }) => {
     <form onSubmit={sendContact}>
       <div className="row">
         <div className="col">
-          <Field placeholder="" label="Nom" />
-          <Field placeholder="" label="Prénom" />
+          <Field name="nom" placeholder="" label="Nom"  autocomplete="family-name" />
+          <Field name="prenom" placeholder="" label="Prénom" autocomplete="given-name" />
           <Select
             selection={["Personel", "Entreprise"]}
             onChange={() => null}
@@ -45,13 +45,14 @@ const Form = ({ onSuccess, onError }) => {
             type="large"
             titleEmpty
           />
-          <Field placeholder="" label="Email" />
+          <Field name="email" placeholder="" label="Email" autocomplete="email" />
           <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
             {sending ? "En cours" : "Envoyer"}
           </Button>
         </div>
         <div className="col">
           <Field
+            name="message"
             placeholder="message"
             label="Message"
             type={FIELD_TYPES.TEXTAREA}
