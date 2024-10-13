@@ -47,7 +47,7 @@ const Form = ({ onSuccess, onError }) => {
             titleEmpty
           />
           <Field name="e-mail" placeholder="" label="Email"/>
-          <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
+          <Button type={BUTTON_TYPES.SUBMIT} disabled={sending} data-testid="button-test-id">
             {sending ? "En cours" : "Envoyer"}
           </Button>
         </div>
