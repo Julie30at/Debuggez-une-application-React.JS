@@ -36,16 +36,17 @@ const Form = ({ onSuccess, onError }) => {
     <form onSubmit={sendContact}>
       <div className="row">
         <div className="col">
-          <Field name="nom" placeholder="" label="Nom"  autocomplete="family-name" />
-          <Field name="prenom" placeholder="" label="Prénom" autocomplete="given-name" />
+          <Field name="nom" placeholder="" label="Nom" />
+          <Field name="prenom" placeholder="" label="Prénom" />
           <Select
+            name="selected"
             selection={["Personel", "Entreprise"]}
             onChange={() => null}
             label="Personel / Entreprise"
             type="large"
             titleEmpty
           />
-          <Field name="email" placeholder="" label="Email" autocomplete="email" />
+          <Field name="e-mail" placeholder="" label="Email"/>
           <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
             {sending ? "En cours" : "Envoyer"}
           </Button>
