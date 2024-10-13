@@ -14,13 +14,12 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
    const { data } = useData();
-  // Si aucune donnée n'est disponible
-  if (!data || !data.events) {
-    return <p>Aucune prestation disponible.</p>;
-  }
-  // Trie les événements par date décroissante (plus récent en premier)
-  const sortedEvents = data.events.sort((a, b) => new Date(b.date) - new Date(a.date));
-  const lastEvent = sortedEvents[0]; // Récupère l'événement le plus récent
+  // Vérifie si les événements sont disponibles
+  const hasEvents = data && data.events && data.events.length > 0;
+
+  // Trie les événements par date décroissante si disponible
+  const sortedEvents = hasEvents ? data.events.sort((a, b) => new Date(b.date) - new Date(a.date)) : [];
+  const lastEvent = sortedEvents[0];// Récupère l'événement le plus récent
   return <>
     <header>
       <Menu />
