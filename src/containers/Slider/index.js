@@ -8,10 +8,10 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
 
-  // Trier les événements par date décroissante
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
+ // Trier les événements par date décroissante
+  const byDateDesc = data?.focus?.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-  );
+  ) || []; // Assurez-vous que c'est un tableau même si data.focus est indéfini
 
   // Fonction pour passer à la carte suivante
   const nextCard = () => {
