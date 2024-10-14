@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-
 import "./style.scss";
 
 const Select = ({
@@ -12,36 +11,53 @@ const Select = ({
   titleEmpty,
   label,
   type = "normal",
+  value, // Ajout de la prop `value`
 }) => {
-  const [value, setValue] = useState();
+  const [internalValue, setInternalValue] = useState(value || "");
   const [collapsed, setCollapsed] = useState(true);
+
+  // Met à jour l'état interne si la prop `value` change
+  useEffect(() => {
+    setInternalValue(value || "");
+  }, [value]);
+
   const changeValue = (newValue) => {
     onChange(newValue);
-    setValue(newValue);
+    setInternalValue(newValue);
     setCollapsed(true);
   };
+
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
       <div className="Select">
         <ul>
-          <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
-            {value || (!titleEmpty && "Toutes")}
+          <li
+            className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}
+            onClick={() => setCollapsed(!collapsed)} // Permet d'ouvrir/fermer la liste en cliquant sur le titre
+          >
+            {internalValue || (!titleEmpty && "Toutes")}
           </li>
           {!collapsed && (
             <>
               {!titleEmpty && (
                 <li onClick={() => changeValue(null)}>
-                  <input defaultChecked={!value} name="selected" type="radio" />{" "}
+                  <input
+                    checked={!internalValue}
+                    name="selected"
+                    type="radio"
+                    onChange={() => changeValue(null)}
+                  />{" "}
                   Toutes
                 </li>
               )}
               {selection.map((s) => (
                 <li key={s} onClick={() => changeValue(s)}>
                   <input
-                    defaultChecked={value === s}
+                    checked={internalValue === s}
                     name="selected"
                     type="radio"
+                    onChange={() => changeValue(s)}
                   />{" "}
                   {s}
                 </li>
@@ -49,11 +65,12 @@ const Select = ({
             </>
           )}
         </ul>
-        <input type="hidden" value={value || ""} name={name} />
+        <input type="hidden" value={internalValue || ""} name={name} />
         <button
           type="button"
           data-testid="collapse-button-testid"
           className={collapsed ? "open" : "close"}
+          aria-expanded={!collapsed} // Attribut d'accessibilité pour indiquer l'état du bouton
           onClick={(e) => {
             e.preventDefault();
             setCollapsed(!collapsed);
@@ -88,7 +105,8 @@ Select.propTypes = {
   titleEmpty: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
-}
+  value: PropTypes.string, // Ajout de la prop `value`
+};
 
 Select.defaultProps = {
   onChange: () => null,
@@ -96,6 +114,7 @@ Select.defaultProps = {
   label: "",
   type: "normal",
   name: "select",
-}
+  value: "", // Valeur par défaut
+};
 
 export default Select;

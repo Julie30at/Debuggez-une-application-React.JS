@@ -40,9 +40,10 @@ const EventList = () => {
       ) : (
         <>
           <h3 className="SelectTitle">Catégories</h3>
-          <Select
+           <Select
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
+            value={type} // Ajout de la prop `value` pour passer l'état contrôlé
           />
           <div id="events" className="ListContainer">
             {filteredEvents.map((event) => (
