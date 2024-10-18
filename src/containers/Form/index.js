@@ -29,6 +29,7 @@ const Form = ({ onSuccess, onError }) => {
   const sendContact = useCallback(
   async (evt) => {
     evt.preventDefault();
+    setSending(true); // Active l'état d'envoi
     setErrorMessage(""); // Réinitialisation du message d'erreur
     setSuccessMessage(""); // Réinitialisation du message de succès
 
@@ -39,13 +40,11 @@ const Form = ({ onSuccess, onError }) => {
       setErrorMessage("Tous les champs sont obligatoires.");
       return; // Arrête l'envoi du formulaire si validation échoue
     }
-    setSending(true); // Active l'état d'envoi
     try {
       await mockContactApi();
 
       // Log après un envoi réussi
       console.log("Envoi réussi, valeurs envoyées :", inputValue);
-
       setSuccessMessage("Votre message a été envoyé avec succès !");
       onSuccess();
 
@@ -88,7 +87,7 @@ const Form = ({ onSuccess, onError }) => {
             name="selected"
             selection={["Personel", "Entreprise"]}
             value={inputValue.type}
-            onChange={(value) => handleInputChange("type", value)} // Mise à jour de la sélection
+            onChange={(value) => handleInputChange("type", value)} 
             label="Personel / Entreprise"
             type="large"
             titleEmpty
