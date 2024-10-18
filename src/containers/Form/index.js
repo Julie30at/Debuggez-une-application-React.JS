@@ -29,7 +29,7 @@ const Form = ({ onSuccess, onError }) => {
   const sendContact = useCallback(
   async (evt) => {
     evt.preventDefault();
-    setSending(true); // Active l'état d'envoi
+ 
     setErrorMessage(""); // Réinitialisation du message d'erreur
     setSuccessMessage(""); // Réinitialisation du message de succès
 
@@ -40,6 +40,7 @@ const Form = ({ onSuccess, onError }) => {
       setErrorMessage("Tous les champs sont obligatoires.");
       return; // Arrête l'envoi du formulaire si validation échoue
     }
+       setSending(true); // Active l'état d'envoi
     try {
       await mockContactApi();
 
