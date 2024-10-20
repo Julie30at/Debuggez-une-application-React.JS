@@ -45,7 +45,9 @@ const Form = ({ onSuccess, onError }) => {
       await mockContactApi();
 
       // Log après un envoi réussi
-      console.log("Envoi réussi, valeurs envoyées :", inputValue);
+     // eslint-disable-next-line no-console
+     console.log("Envoi réussi, valeurs envoyées :", inputValue);
+
       setSuccessMessage("Votre message a été envoyé avec succès !");
       onSuccess();
 
