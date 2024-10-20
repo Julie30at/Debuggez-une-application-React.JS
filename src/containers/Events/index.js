@@ -44,6 +44,7 @@ const EventList = () => {
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
             value={type} // Ajout de la prop `value` pour passer l'état contrôlé
+            placeholder="Toutes"
           />
           <div id="events" className="ListContainer">
             {filteredEvents.map((event) => (

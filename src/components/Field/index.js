@@ -13,6 +13,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value,
     case FIELD_TYPES.INPUT_TEXT:
       component = (
         <input
+          id={name}
           type="text"
           name={name}
           placeholder={placeholder}
@@ -25,6 +26,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value,
      case FIELD_TYPES.TEXTAREA:
       component = (
         <textarea
+          id={name}
           name={name}
           placeholder={placeholder} // Ajout du placeholder
           data-testid="field-testid"
@@ -36,6 +38,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value,
     default:
       component = (
         <input
+          id={name}
           type="text"
           name={name}
           placeholder={placeholder}

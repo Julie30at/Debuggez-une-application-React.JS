@@ -12,6 +12,7 @@ const Select = ({
   label,
   type = "normal",
   value, // Ajout de la prop `value`
+  placeholder, // Ajout de la prop `placeholder`
 }) => {
   const [internalValue, setInternalValue] = useState(value || "");
   const [collapsed, setCollapsed] = useState(true);
@@ -29,14 +30,14 @@ const Select = ({
 
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
-      {label && <div className="label">{label}</div>}
+       {label && <label htmlFor={name} className="label">{label}</label>}
       <div className="Select">
         <ul>
           <li
             className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}
             onClick={() => setCollapsed(!collapsed)} // Permet d'ouvrir/fermer la liste en cliquant sur le titre
           >
-            {internalValue || (!titleEmpty && "Toutes")}
+            {internalValue || placeholder || (!titleEmpty && "Toutes")}
           </li>
           {!collapsed && (
             <>
@@ -106,6 +107,7 @@ Select.propTypes = {
   label: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string, // Ajout de la prop `value`
+  placeholder: PropTypes.string, // Ajout de la prop `placeholder`
 };
 
 Select.defaultProps = {
@@ -115,6 +117,7 @@ Select.defaultProps = {
   type: "normal",
   name: "select",
   value: "", // Valeur par défaut
+  placeholder: "",
 };
 
 export default Select;

@@ -72,14 +72,14 @@ const Form = ({ onSuccess, onError }) => {
         <div className="col">
           <Field
             name="nom"
-            placeholder=""
+            placeholder="nom"
             label="Nom"
             value={inputValue.lastName}
             onChange={(e) => handleInputChange("lastName", e.target.value)}
           />
           <Field
             name="prenom"
-            placeholder=""
+            placeholder="prénom"
             label="Prénom"
             value={inputValue.firstName}
             onChange={(e) => handleInputChange("firstName", e.target.value)}
@@ -88,14 +88,15 @@ const Form = ({ onSuccess, onError }) => {
             name="selected"
             selection={["Personel", "Entreprise"]}
             value={inputValue.type}
-            onChange={(value) => handleInputChange("type", value)} 
+            onChange={(value) => handleInputChange("type", value)}
             label="Personel / Entreprise"
             type="large"
             titleEmpty
+            placeholder="Choisir"
           />
           <Field
             name="e-mail"
-            placeholder=""
+            placeholder="email"
             label="Email"
             value={inputValue.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
@@ -107,7 +108,7 @@ const Form = ({ onSuccess, onError }) => {
         <div className="col">
           <Field
             name="message"
-            placeholder=""
+            placeholder="écrivez votre message"
             label="Message"
             type={FIELD_TYPES.TEXTAREA}
             value={inputValue.message}
