@@ -85,6 +85,7 @@ const Form = ({ onSuccess, onError }) => {
             onChange={(e) => handleInputChange("firstName", e.target.value)}
           />
           <Select
+            id="selected"
             name="selected"
             selection={["Personel", "Entreprise"]}
             value={inputValue.type}

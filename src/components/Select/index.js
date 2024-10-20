@@ -30,7 +30,7 @@ const Select = ({
 
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
-       {label && <label htmlFor={name} className="label">{label}</label>}
+       {label && <div className="label">{label}</div>}
       <div className="Select">
         <ul>
           <li
