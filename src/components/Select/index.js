@@ -38,6 +38,7 @@ const Select = ({
             onClick={() => setCollapsed(!collapsed)} // Permet d'ouvrir/fermer la liste en cliquant sur le titre
           >
             {internalValue || placeholder || (!titleEmpty && "Toutes")}
+            {/* Affiche la valeur interne, ou le placeholder, ou "Toutes" si titleEmpty est faux. */}
           </li>
           {!collapsed && (
             <>
