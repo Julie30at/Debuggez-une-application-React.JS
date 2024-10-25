@@ -28,10 +28,10 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value,
         <textarea
           id={name}
           name={name}
-          placeholder={placeholder} // Ajout du placeholder
+          placeholder={placeholder} 
           data-testid="field-testid"
-          value={value} // Ajout de value pour le textarea
-          onChange={onChange} // Ajout de onChange pour gérer les modifications
+          value={value} 
+          onChange={onChange} 
         />
       );
       break;

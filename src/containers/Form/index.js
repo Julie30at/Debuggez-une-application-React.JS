@@ -6,6 +6,11 @@ import Button, { BUTTON_TYPES } from "../../components/Button";
 
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 500); });
 
+const isValidEmail = (email) => {
+  const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
+  return regexEmail.test(email.toLowerCase());
+};
+
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,18 +24,13 @@ const Form = ({ onSuccess, onError }) => {
     message: "",
   });
 
-  const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i
-
- const handleInputChange = useCallback((field, value) => {
-  // Définit une fonction de gestion d'événements pour la modification d'un champ d'entrée.
-  setInputValue((prevState) => ({
-    // Met à jour l'état inputValue en utilisant la fonction setInputValue.
-    ...prevState, // Copie l'état précédent pour conserver les valeurs des autres champs.
-    [field]: value, // Met à jour la valeur du champ spécifié (field) avec la nouvelle valeur (value).
-  }));
-}, []);
-// useCallback est utilisé pour mémoriser la fonction handleInputChange afin qu'elle ne soit pas recréée à chaque rendu.
-// Le tableau de dépendances est vide ([]), donc la fonction ne sera créée qu'une seule fois, lors du premier rendu.
+ // Fonction de gestion des changements de valeur des champs d'entrée
+  const handleInputChange = useCallback((field, value) => {
+    setInputValue((prevState) => ({
+      ...prevState, 
+      [field]: value, 
+    }));
+  }, []);
 
   const sendContact = useCallback(
   async (evt) => {
@@ -41,13 +41,12 @@ const Form = ({ onSuccess, onError }) => {
 
     // Validation des champs du formulaire
     const { firstName, lastName, type, email, message } = inputValue;
-    const isEmailValid = regexEmail.test(email.toLowerCase())
 
-    if (!firstName || !lastName || !type || !isEmailValid || !message) {
-      setErrorMessage(isEmailValid === true ? "Tous les champs sont obligatoires." : "votre adresse mail n'est pas valide.");
-      return; // Arrête l'envoi du formulaire si validation échoue
+    if (!firstName || !lastName || !type || !isValidEmail(email) || !message) {
+        setErrorMessage(isValidEmail(email) ? "Tous les champs sont obligatoires." : "votre adresse mail n'est pas valide.");
+        return; // Arrête l'envoi du formulaire si validation échoue
     }
-       setSending(true); // Active l'état d'envoi
+       setSending(true); 
     try {
       await mockContactApi();
 

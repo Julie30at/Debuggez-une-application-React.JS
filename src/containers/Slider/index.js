@@ -11,8 +11,8 @@ const Slider = () => {
  // Trier les événements par date décroissante
   const byDateDesc = data?.focus?.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-  ) || []; // Assurez-vous que c'est un tableau même si data.focus est indéfini
-
+  ) || []; 
+  
   // Fonction pour passer à la carte suivante
   const nextCard = () => {
     setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);

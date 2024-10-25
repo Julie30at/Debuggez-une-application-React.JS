@@ -13,6 +13,8 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+
+   // Filtre et limite les événements en fonction du type et de la page actuelle
   const filteredEvents = (
     (!type
       ? data?.events
@@ -26,12 +28,19 @@ const EventList = () => {
     }
     return false;
   });
+
+  // Met à jour le type d'événement sélectionné et réinitialise la page actuelle
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
   };
+
+  // Calcule le nombre total de pages en fonction des événements filtrés
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
+
+  // Récupère la liste des types d'événements pour la sélection des filtres
   const typeList = new Set(data?.events.map((event) => event.type));
+
   return (
     <>
       {error && <div>An error occured</div>}
@@ -43,7 +52,7 @@ const EventList = () => {
            <Select
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
-            value={type} // Ajout de la prop `value` pour passer l'état contrôlé
+            value={type} 
             placeholder="Toutes"
           />
           <div id="events" className="ListContainer">

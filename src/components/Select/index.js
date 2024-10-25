@@ -11,17 +11,18 @@ const Select = ({
   titleEmpty,
   label,
   type = "normal",
-  value, // Ajout de la prop `value`
-  placeholder, // Ajout de la prop `placeholder`
+  value, 
+  placeholder, 
 }) => {
   const [internalValue, setInternalValue] = useState(value || "");
   const [collapsed, setCollapsed] = useState(true);
 
-  // Met à jour l'état interne si la prop `value` change
+  // Met à jour `internalValue` à chaque changement de la prop `value`.
   useEffect(() => {
     setInternalValue(value || "");
   }, [value]);
 
+  // Fonction pour sélectionner une nouvelle valeur et fermer la liste déroulante.
   const changeValue = (newValue) => {
     onChange(newValue);
     setInternalValue(newValue);
@@ -72,7 +73,7 @@ const Select = ({
           type="button"
           data-testid="collapse-button-testid"
           className={collapsed ? "open" : "close"}
-          aria-expanded={!collapsed} // Attribut d'accessibilité pour indiquer l'état du bouton
+          aria-expanded={!collapsed} 
           onClick={(e) => {
             e.preventDefault();
             setCollapsed(!collapsed);
