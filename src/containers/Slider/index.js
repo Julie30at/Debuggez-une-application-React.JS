@@ -8,11 +8,11 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
 
- // Trier les événements par date décroissante
+ // Tri des événements par ordre croissant
   const byDateDesc = data?.focus?.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    new Date(evtA.date) > new Date(evtB.date) ? 1 : -1
   ) || []; 
-  
+
   // Fonction pour passer à la carte suivante
   const nextCard = () => {
     setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);
