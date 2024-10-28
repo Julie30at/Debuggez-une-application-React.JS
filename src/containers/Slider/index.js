@@ -25,6 +25,7 @@ const Slider = () => {
     return () => clearTimeout(timer); // Nettoyage du timer à chaque mise à jour
   }, [index, byDateDesc.length]); // Ne se déclenche que lorsque l'index ou la longueur des données change
 
+  // optimisation des key pour éviter des confusions
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
@@ -52,6 +53,7 @@ const Slider = () => {
               key={paginationEvent.date} 
               type="radio"
               name="radio-button"
+              // idx remplacé par index
               checked={index === radioIdx} 
               readOnly
             />
