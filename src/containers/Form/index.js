@@ -6,6 +6,7 @@ import Button, { BUTTON_TYPES } from "../../components/Button";
 
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 500); });
 
+// vérification du format de l'email.
 const isValidEmail = (email) => {
   const regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
   return regexEmail.test(email.toLowerCase());
@@ -13,9 +14,12 @@ const isValidEmail = (email) => {
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
+
+  // initialisation des messages utilisateur
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  // initialisation des valeurs des champs
   const [inputValue, setInputValue] = useState({
     firstName: "",
     lastName: "",

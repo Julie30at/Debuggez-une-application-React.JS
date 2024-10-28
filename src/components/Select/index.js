@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
 
+// ajout des props value et placeholder.
 const Select = ({
   selection,
   onChange,

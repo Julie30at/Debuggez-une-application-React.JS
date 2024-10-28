@@ -13,13 +13,17 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
+
+  // remplacement const last par data
    const { data } = useData();
+
   // Vérifie si les événements sont disponibles
   const hasEvents = data && data.events && data.events.length > 0;
 
   // Trie les événements par date décroissante si disponible
   const sortedEvents = hasEvents ? data.events.sort((a, b) => new Date(b.date) - new Date(a.date)) : [];
   const lastEvent = sortedEvents[0];// Récupère l'événement le plus récent
+
   return <>
     <header>
       <Menu />
@@ -29,7 +33,7 @@ const Page = () => {
         <Slider />
       </section>
       <section className="ServicesContainer">
-        <h2 className="Title" id="nos-services">Nos services</h2>
+        <h2 className="Title" id="nos-services">Nos services</h2> 
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
           <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
@@ -124,6 +128,7 @@ const Page = () => {
         <h3>Notre derniére prestation</h3>
        {lastEvent ? (
             <EventCard
+            // utilisation de lastEvent pour afficher dernier évènement
               imageSrc={lastEvent.cover || '/images/default-cover.png'}
               title={lastEvent.title}
               date={new Date(lastEvent.date)}

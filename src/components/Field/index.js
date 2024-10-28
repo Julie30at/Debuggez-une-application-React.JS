@@ -7,6 +7,7 @@ export const FIELD_TYPES = {
   TEXTAREA: 2,
 };
 
+// ajout des props value et onChange
 const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder, value, onChange }) => {
   let component;
   switch (type) {

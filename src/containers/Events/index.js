@@ -11,10 +11,11 @@ const PER_PAGE = 9;
 
 const EventList = () => {
   const { data, error } = useData();
+  // type est initialisé à null, clarifie l’intention initiale de ne pas filtrer par type
   const [type, setType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-
-   // Filtre et limite les événements en fonction du type et de la page actuelle
+  
+  // filtrage basé sur le type sélectionné, affiche les événements du type sélectionné si type n’est pas null
   const filteredEvents = (
     (!type
       ? data?.events
@@ -29,18 +30,12 @@ const EventList = () => {
     return false;
   });
 
-  // Met à jour le type d'événement sélectionné et réinitialise la page actuelle
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
   };
-
-  // Calcule le nombre total de pages en fonction des événements filtrés
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
-
-  // Récupère la liste des types d'événements pour la sélection des filtres
   const typeList = new Set(data?.events.map((event) => event.type));
-
   return (
     <>
       {error && <div>An error occured</div>}
@@ -52,6 +47,7 @@ const EventList = () => {
            <Select
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
+            // utilisation des props ajoutées à select
             value={type} 
             placeholder="Toutes"
           />
